@@ -10,7 +10,12 @@ wrapper = IGDBWrapper(av.client_id, av.access_token)
 
 name = input('Enter search term: ')
 
-result = wrapper.api_request('games', f'fields name, rating; search \"{name}\";')
+#test query of the game api
+result = wrapper.api_request('games', f'fields name, rating; where name ~ *\"{name}\"*; limit 50; sort rating desc;')
+# print(result)
 answer = json.loads(result)
 print(answer)
 
+#writes to json file called test
+with open("test.json", "w") as output:
+    json.dump(answer, output)
