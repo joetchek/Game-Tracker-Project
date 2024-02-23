@@ -1,6 +1,8 @@
 from json_parser import JSON_Parser
 from game_component import Game_Component
-from typing import List
+import os
+import json
+from igdb.wrapper import IGDBWrapper
 
 #TODO -- function that calls the IGDB and returns 25 search results
 #TODO -- function that reads in a JSON file and makes game components for all of the files - DONE
@@ -8,6 +10,9 @@ from typing import List
 #TODO -- function that asks user for input and makes new game component
 
 parser = JSON_Parser()
+client_id = os.environ.get('ClientID')
+access_token = os.environ.get('AccessToken')
+wrapper = IGDBWrapper(client_id, access_token)
 
 class Game_Manager:
     #initializes game list, game_list is a list of game components
@@ -50,10 +55,19 @@ class Game_Manager:
         for game in self.game_list:
             print(game)
 
-# manager = Game_Manager()
+    #searches top 25 games by search term
+    def igdb_search(self) -> list:
+        name = input('Enter search term: ')
+        result = wrapper.api_request('games', f'fields name, rating, first_release_date; where name ~ *\"{name}\"*; limit 25; sort rating desc;')
+        answer = json.loads(result)
+        return answer
+
+
+#manager = Game_Manager()
 # manager.read_saved_games()
 # manager.print_game_list()
 # comp = Game_Component('n', 99, '1', '1', 22)   
 # manager.add_game_component(comp)   
 # manager.print_game_list()
 # manager.add_games_to_file()
+    

@@ -7,12 +7,13 @@ class Game_Component:
     #date_released --- release date of the game 
     #date_complete --- date user inputs as game complete
     #hours --- hours user logs in game
-    def __init__(self, name: str, rating: int, date_released: str, date_complete: str, hours: float) -> None:
+    def __init__(self, name: str, rating: int, date_released: str, date_complete: str, hours: float, platform: str) -> None:
         self.name = name
         self.rating = rating
         self.date_released = date_released
         self.date_complete = date_complete
         self.hours = hours
+        self.platform = platform
 
     #changes name
     def set_name(self, new_name):
@@ -34,14 +35,19 @@ class Game_Component:
     def set_date_released(self, new_date):
         self.date_released = new_date
 
+    #changes platform
+    def set_platform(self, new_platform):
+        self.platform = new_platform
+
     def __str__(self) -> str:
-        return f'Name: {self.name}\nRating: {self.rating}\nHours: {self.hours}\nDate Released: {self.date_released}\nDate Complete: {self.date_complete}'
+        return f'Name: {self.name}\nRating: {self.rating}\nHours: {self.hours}\nPlatform: {self.platform}\nDate Released: {self.date_released}\nDate Complete: {self.date_complete}'
 
     def return_as_dict(self) -> dict:
         return_dict = {}
         return_dict['name'] = self.name
         return_dict['rating'] = self.rating
         return_dict['hours'] = self.hours
+        return_dict['platform'] = self.platform
         return_dict['date_released'] = self.date_released
         return_dict['date_completed'] = self.date_complete
 
