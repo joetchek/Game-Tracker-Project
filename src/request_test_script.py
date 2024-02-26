@@ -26,5 +26,8 @@ from game_manager import Game_Manager
 #     json.dump(answer, output)
 
 manager = Game_Manager()
-test_search = manager.igdb_search()
-print(test_search)
+# test_search = manager.igdb_search()
+# ans = manager.select_by_name(test_search)
+# print(ans)
+# print(test_search[ans])
+manager.user_prompt()
