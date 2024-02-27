@@ -2,6 +2,7 @@ from igdb.wrapper import IGDBWrapper
 import json
 import os
 from game_manager import Game_Manager
+import calendar
 
 # client_id = os.environ.get('ClientID')
 # access_token = os.environ.get('AccessToken')
@@ -25,7 +26,7 @@ from game_manager import Game_Manager
 # with open("test.json", "w") as output:
 #     json.dump(answer, output)
 
-manager = Game_Manager()
+manager = Game_Manager()    
 # test_search = manager.igdb_search()
 # ans = manager.select_by_name(test_search)
 # print(ans)

@@ -5,11 +5,6 @@ import json
 from igdb.wrapper import IGDBWrapper
 import datetime
 
-#TODO -- function that calls the IGDB and returns 25 search results - DONE
-#TODO -- function that reads in a JSON file and makes game components for all of the files - DONE
-#TODO -- move the add to file function to this class - DONE
-#TODO -- function that asks user for input and makes new game component
-
 parser = JSON_Parser()
 client_id = os.environ.get('ClientID')
 access_token = os.environ.get('AccessToken')
@@ -19,6 +14,7 @@ class Game_Manager:
     #initializes game list, game_list is a list of game components
     def __init__(self) -> None:
         self.game_list = []
+        self.read_saved_games()
 
     #takes in dict and returns game component with dict keywords
     def json_to_game(self, json_data: dict) -> Game_Component:
@@ -32,15 +28,15 @@ class Game_Manager:
         
         if 'name' in json_data:
             name = json_data['name']
-        elif 'rating' in json_data:
+        if 'rating' in json_data:
             rating = json_data['rating']
-        elif 'date_released' in json_data:
+        if 'date_released' in json_data:
             r_date = json_data['date_released']
-        elif 'date_completed' in json_data:
+        if 'date_completed' in json_data:
             c_date = json_data['date_completed']
-        elif 'platfrom' in json_data:
+        if 'platform' in json_data:
             platform = json_data['platform']
-        elif 'hours' in json_data:
+        if 'hours' in json_data:
             hours = json_data['hours']
 
         game = Game_Component(name, rating, r_date, c_date, hours, platform)
@@ -99,7 +95,6 @@ class Game_Manager:
         json_data = {} #initializes data
         selection_list = self.igdb_search() #searches the database
         answer = self.select_by_name(selection_list) #prompts user for select
-
         json_data = selection_list[answer] #grabs 
         r_date = json_data['first_release_date']
         r_date_formatted = datetime.date.fromtimestamp(r_date) #formates database date
@@ -107,9 +102,26 @@ class Game_Manager:
         print(json_data)
         del json_data['id'] #deletes unneeded id key
         del json_data['first_release_date'] #deletes unneeded date key
+        if 'rating' in json_data: #check if rating exists
+            rating_format = '{:.2f}'.format(json_data['rating']) #formats rating to 2 dec. places
+        else:
+            rating_format = 0
+        json_data['rating'] = float(rating_format)
         json_data['date_released'] = date_string # sets new key to formatted date
-        print(json_data)
-        #WORKING FOR NOW, TMMRW NEED TO ADD INPUT FOR OTHER KEYS AND WRITE TO FILE
+        hours = float(input("How many hours to beat: ")) #input for hours
+        platform = input('Platform: ') #input platform
+        month = input('Enter month name completed: ') #input month
+        month_format = datetime.datetime.strptime(month, '%B').month #format month from name to number
+        day = int(input('Enter day completed: ')) #input day
+        year = int(input('Enter year completed: ')) #input year
+        c_date = datetime.date(year, month_format, day) #format into date
+        date_string = "{:%B %d, %Y}".format(c_date) #format completed date
+        json_data['hours'] = hours #put hours in json
+        json_data['platform'] = platform #put platform in json
+        json_data['date_completed'] = date_string #put complete date in json
+        game = self.json_to_game(json_data) #create game component
+        self.add_game_component(game) #add to game list
+        self.add_games_to_file()#write to file
 
 
         
