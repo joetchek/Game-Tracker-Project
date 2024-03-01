@@ -1,42 +1,10 @@
 [
   {
-    "name": "Test",
-    "rating": 99,
-    "hours": 33.33,
-    "platform": "N/A",
-    "date_released": "Jan 1st 2024",
-    "date_completed": "Jan 2nd 2024"
-  },
-  {
-    "name": "n",
-    "rating": 99,
-    "hours": 22,
-    "platform": "N/A",
-    "date_released": "1",
-    "date_completed": "1"
-  },
-  {
-    "name": "n",
-    "rating": 99,
-    "hours": 22,
-    "platform": "N/A",
-    "date_released": "1",
-    "date_completed": "1"
-  },
-  {
-    "name": "Persona 4",
-    "rating": 87.49,
-    "hours": 70,
-    "platform": "PS3",
-    "date_released": "July 09, 2008",
-    "date_completed": "December 01, 2015"
-  },
-  {
-    "name": "Super Mario 64",
-    "rating": 89.69,
-    "hours": 20,
-    "platform": "Wii",
-    "date_released": "June 22, 1996",
-    "date_completed": "May 01, 2013"
+    "name": "The Legend of Zelda: Tears of the Kingdom",
+    "rating": 94.82,
+    "hours": 2,
+    "platform": "Switch",
+    "date_released": "May 11, 2023",
+    "date_completed": "October 22, 2023"
   }
 ]

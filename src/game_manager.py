@@ -84,18 +84,22 @@ class Game_Manager:
         #logic loop to verify user input
         answer = len(json_data) + 1
         while (answer > len(json_data)):
-            answer = int(input('Select number of game to add: '))
+            answer = int(input('Select number of game to add or press 0 to search again: '))
+            if answer == 0:
+                return answer - 1
             if answer > len(json_data):
                 print('Try again')
-
         return answer - 1
     
     #prompts user for search term and creates game component
     def user_prompt(self):
         json_data = {} #initializes data
-        selection_list = self.igdb_search() #searches the database
-        answer = self.select_by_name(selection_list) #prompts user for select
-        json_data = selection_list[answer] #grabs 
+        answer = -1
+        while answer == -1: # logic loop to allow for going back after a wrong search
+            selection_list = self.igdb_search() #searches the database
+            answer = self.select_by_name(selection_list) #prompts user for select
+        json_data = selection_list[answer] #grabs
+        print(json_data) 
         r_date = json_data['first_release_date']
         r_date_formatted = datetime.date.fromtimestamp(r_date) #formates database date
         date_string = "{:%B %d, %Y}".format(r_date_formatted)
@@ -123,7 +127,7 @@ class Game_Manager:
         self.add_game_component(game) #add to game list
         self.add_games_to_file()#write to file
 
-
+#TODO -- Make a function that can delete a game from the list
         
 
 
