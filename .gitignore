@@ -177,3 +177,4 @@ access_varibles.py
 
 #!.yarn/cache
 .pnp.*
+.yarnnrc.yml

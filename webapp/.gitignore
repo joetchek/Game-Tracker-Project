@@ -11,3 +11,7 @@
 
 #!.yarn/cache
 .pnp.*
+
+.yarn
+.yarnrc.yml
+
