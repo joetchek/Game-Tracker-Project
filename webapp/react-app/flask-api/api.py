@@ -13,8 +13,14 @@ wrapper = IGDBWrapper(client_id, access_token)
 # print(client_id)
 # print(access_token)
 
-@app.route('/game')
-def pull_game_request():
+@app.route('/api/game/mario')
+def pull_game_request_m():
     name = 'Mario'
+    result = wrapper.api_request('games', f'fields name, rating, first_release_date; where name ~ *\"{name}\"*; limit 25; sort rating desc;')
+    return json.loads(result)
+
+@app.route('/api/game/zelda')
+def pull_game_request_z():
+    name = 'Zelda'
     result = wrapper.api_request('games', f'fields name, rating, first_release_date; where name ~ *\"{name}\"*; limit 25; sort rating desc;')
     return json.loads(result)

@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import React, {useState, useEffect} from 'react'
 import './App.css';
+import {Route, BrowserRouter, Routes} from "react-router-dom"
+import Home from "./components/Home"
 
 function App() {
 
@@ -10,20 +12,22 @@ function App() {
   //allows it to track certain state variables 
   //fetch gets the /game endpoint from our flask api and uses .then statements to process it as 
   //readible JSON
-  useEffect(() => {
-    fetch("/game").then(result => result.json()).then(data => {
-      setGame(data[0]["name"])
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetch("/api/game").then(result => result.json()).then(data => {
+  //     setGame(data[0]["name"])
+  //   });
+  // }, []);
 
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <p>
-          The game name is {game}
-        </p>
-      </header>
+    <div>
+        <BrowserRouter>
+          <Routes>
+            <Route exact path='/' element={<Home />} />
+          </Routes>
+        </BrowserRouter>
     </div>
+
+    //TODO -- GOAL -- Setup two buttons that route to two pages, each returning a different api call
   );
 }
 
