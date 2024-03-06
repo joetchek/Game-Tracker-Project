@@ -1,8 +1,9 @@
 import logo from './logo.svg';
 import React, {useState, useEffect} from 'react'
 import './App.css';
-import {Route, BrowserRouter, Routes} from "react-router-dom"
+import {Route, BrowserRouter, Routes, Link} from "react-router-dom"
 import Home from "./components/Home"
+import Game from './components/Game';
 
 function App() {
 
@@ -23,11 +24,14 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route exact path='/' element={<Home />} />
+            <Route path='/Zelda' element={<Game gamePath={'api/game/zelda'}/>} />
+            <Route path='/Mario' element={<Game gamePath={'api/game/mario'}/>} />
           </Routes>
         </BrowserRouter>
     </div>
 
-    //TODO -- GOAL -- Setup two buttons that route to two pages, each returning a different api call
+    //TODO -- GOAL -- Setup two buttons that route to two pages, each returning a different api call --DONE
+    //TODO -- GOAL -- Setup a game component system with bootstrap stylings and make a list of those when visiting specific endpoints 
   );
 }
 
