@@ -10,8 +10,8 @@ app = Flask(__name__)
 client_id = os.environ.get('CLIENT_ID')
 access_token = os.environ.get('ACCESS_TOKEN')
 wrapper = IGDBWrapper(client_id, access_token)
-# print(client_id)
-# print(access_token)
+print(client_id)
+print(access_token)
 
 @app.route('/api/game/mario')
 def pull_game_request_m():
