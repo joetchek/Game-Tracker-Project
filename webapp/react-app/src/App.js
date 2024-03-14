@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import React, {useState, useEffect} from 'react'
 import './App.css';
-import {Route, BrowserRouter, Routes, Link} from "react-router-dom"
+import {Route, BrowserRouter, Routes} from "react-router-dom"
 import Home from "./components/Home"
 import Game from './components/Game';
 
@@ -36,3 +36,4 @@ function App() {
 }
 
 export default App;
+

@@ -1,4 +1,9 @@
 import {useState, useEffect } from "react"
+import GameComponent from "./GameComponent";
+
+function round(value, decimal) {
+    return value.toPrecision(decimal);
+}
 
 const Game = ({gamePath}) => {
 
@@ -14,7 +19,7 @@ const Game = ({gamePath}) => {
             const newData = data.map(object => ({
                 id: object.id,
                 name: object.name,
-                rating: object.rating
+                rating: round(object.rating, 4)
             }));
             console.log(newData)
             setGameData(newData)
@@ -24,14 +29,12 @@ const Game = ({gamePath}) => {
     //make the games return a game component for each of these next
     return(
         <div>
-            {gameData.map(game => (
-                <p>
-                    <li>
-                        <p>The games id is {game.id}</p>
-                        <p>The games name is {game.name}</p>
-                        <p>The games rating is {game.rating}</p>
-                    </li>
-                </p>
+            {gameData.map(game => ( 
+                <GameComponent 
+                    name={game.name} 
+                    id={game.id} 
+                    rating={game.rating} 
+                />
             ))}
         </div>
     );
